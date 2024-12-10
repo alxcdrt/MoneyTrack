@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Api", "MoneyTrack.Api\MoneyTrack.Api.csproj", "{F665F3EB-E021-49BA-AFFE-FA1A4D1683DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Infrastructure", "MoneyTrack.Infrastructure\MoneyTrack.Infrastructure.csproj", "{166EBA8D-91F3-429E-9B75-5936FAD4F3A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrack.Domain", "MoneyTrack.Domain\MoneyTrack.Domain.csproj", "{CF6764D7-6D35-42DD-A62B-91BFFBD2C537}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F665F3EB-E021-49BA-AFFE-FA1A4D1683DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F665F3EB-E021-49BA-AFFE-FA1A4D1683DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F665F3EB-E021-49BA-AFFE-FA1A4D1683DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F665F3EB-E021-49BA-AFFE-FA1A4D1683DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166EBA8D-91F3-429E-9B75-5936FAD4F3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166EBA8D-91F3-429E-9B75-5936FAD4F3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166EBA8D-91F3-429E-9B75-5936FAD4F3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166EBA8D-91F3-429E-9B75-5936FAD4F3A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6764D7-6D35-42DD-A62B-91BFFBD2C537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6764D7-6D35-42DD-A62B-91BFFBD2C537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6764D7-6D35-42DD-A62B-91BFFBD2C537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6764D7-6D35-42DD-A62B-91BFFBD2C537}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
