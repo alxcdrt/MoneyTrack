@@ -14,7 +14,8 @@ public class AccountManager : Manager<Account>
     public AccountManager(
         IQueryBuilderFactory queryBuilderFactory,
         IStore store,
-        ILogger<AccountManager> logger) : base(queryBuilderFactory, store, logger)
+        IValidator<Account> validator,
+        ILogger<AccountManager> logger) : base(queryBuilderFactory, store, validator, logger)
     {
     }
     

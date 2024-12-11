@@ -14,7 +14,8 @@ public class OperationManager : Manager<Operation>
     public OperationManager(
         IQueryBuilderFactory queryBuilderFactory,
         IStore store, 
-        ILogger<OperationManager> logger) : base(queryBuilderFactory, store, logger)
+        IValidator<Operation> validator,
+        ILogger<OperationManager> logger) : base(queryBuilderFactory, store, validator, logger)
     {
     }
 

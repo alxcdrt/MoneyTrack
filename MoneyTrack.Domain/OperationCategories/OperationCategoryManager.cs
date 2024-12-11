@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 using MoneyTrack.Domain.Abstractions;
 using MoneyTrack.Domain.Data;
@@ -14,7 +15,8 @@ public class OperationCategoryManager : Manager<OperationCategory>
     public OperationCategoryManager(
         IQueryBuilderFactory queryBuilderFactory,
         IStore store,
-        ILogger<OperationCategory> logger) : base(queryBuilderFactory, store, logger)
+        IValidator<OperationCategory> validator,
+        ILogger<OperationCategory> logger) : base(queryBuilderFactory, store, validator, logger)
     {
     }
 
@@ -22,7 +24,7 @@ public class OperationCategoryManager : Manager<OperationCategory>
 
     #region Methods
 
-    public async Task<OperationCategory> CreateAsync(
+    public Task<Fin<OperationCategory>> CreateAsync(
         ClaimsPrincipal principal,
         string name,
         CancellationToken cancellationToken = default)
@@ -32,10 +34,7 @@ public class OperationCategoryManager : Manager<OperationCategory>
             Name = name
         };
         
-        await Store.AddAsync(operationCategory, cancellationToken);
-        await Store.SaveChangesAsync(cancellationToken);
-        
-        return operationCategory;
+        return AddAsync(operationCategory, cancellationToken);
     }
 
     #endregion Methods
