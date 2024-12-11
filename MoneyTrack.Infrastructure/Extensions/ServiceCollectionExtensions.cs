@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MoneyTrack.Domain.Accounts;
 using MoneyTrack.Domain.Data;
+using MoneyTrack.Domain.OperationCategories;
+using MoneyTrack.Domain.Operations;
 using MoneyTrack.Domain.Queries;
 using MoneyTrack.Infrastructure.Data;
 
@@ -23,6 +25,8 @@ public static class ServiceCollectionExtensions
     {
         return services
             .AddScoped<IQueryBuilderFactory, QueryBuilderFactory>()
-            .AddScoped<AccountManager>();
+            .AddScoped<AccountManager>()
+            .AddScoped<OperationManager>()
+            .AddScoped<OperationCategoryManager>();
     }
 }

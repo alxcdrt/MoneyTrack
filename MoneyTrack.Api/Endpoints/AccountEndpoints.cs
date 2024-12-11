@@ -9,9 +9,17 @@ namespace MoneyTrack.Api.Endpoints;
 
 public static class AccountEndpoints
 {
-    public static void RegisterEndpoints(this IEndpointRouteBuilder app)
+    #region Constants
+
+    private const string Endpoint = "/api/v1/accounts"; 
+
+    #endregion Constants
+    
+    #region Methods
+    
+    public static void RegisterAccountEndpoints(this IEndpointRouteBuilder app)
     {
-        var accounts = app.MapGroup("/api/v1/accounts");
+        var accounts = app.MapGroup(Endpoint);
 
         accounts.MapPost(string.Empty, CreateAsync);
         accounts.MapGet(string.Empty, ListAsync);
@@ -36,4 +44,6 @@ public static class AccountEndpoints
             .ToModel()
             .ToListAsync(cancellationToken);
     }
+    
+    #endregion Methods
 }

@@ -12,8 +12,8 @@ builder
 
 var app = builder.Build();
 
-app.RegisterEndpoints();
-
-app.MapGet("/", () => "Hello World!");
+app.RegisterAccountEndpoints();
+app.RegisterOperationEndpoints();
+app.RegisterOperationCategoryEndpoints();
 
 app.Run();
