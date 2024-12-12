@@ -1,5 +1,8 @@
 using System.Security.Claims;
-using MoneyTrack.Api.Models;
+using LanguageExt;
+using MoneyTrack.Api.Helpers;
+using MoneyTrack.Api.Models.Operations.Requests;
+using MoneyTrack.Api.Models.Operations.Responses;
 using MoneyTrack.Domain.Data.Entities;
 using MoneyTrack.Domain.Operations;
 
@@ -22,13 +25,15 @@ public static class OperationEndpoints
         operations.MapPost(string.Empty, CreateAsync);
     }
 
-    private static Task<Operation> CreateAsync(
-        OperationModel model,
+    private static async Task<IResult> CreateAsync(
+        OperationCreationRequest creationRequest,
         ClaimsPrincipal user,
         OperationManager manager,
         CancellationToken cancellationToken = default)
     {
-        return manager.CreateAsync(user, model.ToData(), cancellationToken);
+        Fin<Operation> result = await manager.CreateAsync(user, creationRequest.ToData(), cancellationToken);
+
+        return result.GetResult(o => Results.Created(string.Empty, o.ToCreationResponse()));
     }
     
     #endregion Methods

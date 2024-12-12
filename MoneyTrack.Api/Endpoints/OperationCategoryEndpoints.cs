@@ -1,7 +1,8 @@
 using System.Security.Claims;
 using LanguageExt;
-using Microsoft.AspNetCore.Mvc;
 using MoneyTrack.Api.Helpers;
+using MoneyTrack.Api.Models.OperationCategories.Requests;
+using MoneyTrack.Api.Models.OperationCategories.Responses;
 using MoneyTrack.Domain.Data.Entities;
 using MoneyTrack.Domain.OperationCategories;
 
@@ -25,14 +26,14 @@ public static class OperationCategoryEndpoints
     }
 
     private static async Task<IResult> CreateAsync(
-        [FromBody]string name,
+        OperationCategoryCreationRequest request,
         ClaimsPrincipal user,
         OperationCategoryManager manager,
         CancellationToken cancellationToken)
     {
-        Fin<OperationCategory> result = await manager.CreateAsync(user, name, cancellationToken);
+        Fin<OperationCategory> result = await manager.CreateAsync(user, request.Name, cancellationToken);
 
-        return result.GetResult(oc => Results.Created(string.Empty, oc));
+        return result.GetResult(oc => Results.Created(string.Empty, oc.ToOperationCategoryCreationResponse()));
     }
     
     #endregion Methods

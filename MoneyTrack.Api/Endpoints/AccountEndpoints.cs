@@ -1,7 +1,9 @@
 using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc;
+using LanguageExt;
 using Microsoft.EntityFrameworkCore;
-using MoneyTrack.Api.Models;
+using MoneyTrack.Api.Helpers;
+using MoneyTrack.Api.Models.Accounts.Requests;
+using MoneyTrack.Api.Models.Accounts.Responses;
 using MoneyTrack.Domain.Accounts;
 using MoneyTrack.Domain.Data.Entities;
 
@@ -25,24 +27,27 @@ public static class AccountEndpoints
         accounts.MapGet(string.Empty, ListAsync);
     }
 
-    private static Task<Account> CreateAsync(
-        [FromBody]string name,
+    private static async Task<IResult> CreateAsync(
+        AccountCreationRequest request,
         ClaimsPrincipal user,
         AccountManager manager,
         CancellationToken cancellationToken)
     {
-        return manager.CreateAsync(user, name, cancellationToken);
+        Fin<Account> result = await manager.CreateAsync(user, request.Name, cancellationToken);
+        return result.GetResult(a => Results.Created(string.Empty, a.ToCreationResponse()));
     }
 
-    private static Task<List<AccountModel>> ListAsync(
+    private static async Task<IResult> ListAsync(
         AccountManager manager,
         CancellationToken cancellationToken)
     {
-        return manager
+        List<AccountDetailsResponse> accounts = await manager
             .Query()
             .Accounts()
-            .ToModel()
+            .ToDetailsResponse()
             .ToListAsync(cancellationToken);
+        
+        return Results.Ok(accounts);
     }
     
     #endregion Methods

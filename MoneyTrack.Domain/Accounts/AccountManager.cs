@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 using MoneyTrack.Domain.Abstractions;
 using MoneyTrack.Domain.Data;
@@ -23,7 +24,7 @@ public class AccountManager : Manager<Account>
     
     #region Methods
 
-    public async Task<Account> CreateAsync(
+    public Task<Fin<Account>> CreateAsync(
         ClaimsPrincipal principal,
         string name,
         CancellationToken cancellationToken = default)
@@ -32,11 +33,8 @@ public class AccountManager : Manager<Account>
         {
             Name = name,
         };
-
-        await Store.AddAsync(account, cancellationToken);
-        await Store.SaveChangesAsync(cancellationToken);
         
-        return account;
+        return AddAsync(account, cancellationToken);
     }
     
     #endregion Methods

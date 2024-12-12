@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using LanguageExt;
 using Microsoft.Extensions.Logging;
 using MoneyTrack.Domain.Abstractions;
 using MoneyTrack.Domain.Data;
@@ -23,17 +24,14 @@ public class OperationManager : Manager<Operation>
 
     #region Methods
 
-    public async Task<Operation> CreateAsync(
+    public Task<Fin<Operation>> CreateAsync(
         ClaimsPrincipal principal,
         OperationData data,
         CancellationToken cancellationToken = default)
     {
         Operation operation = data.ToOperation();
         
-        await Store.AddAsync(operation, cancellationToken);
-        await Store.SaveChangesAsync(cancellationToken);
-
-        return operation;
+        return AddAsync(operation, cancellationToken);
     }
 
     #endregion Methods

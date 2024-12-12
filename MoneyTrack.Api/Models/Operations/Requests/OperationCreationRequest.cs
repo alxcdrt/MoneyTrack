@@ -1,11 +1,10 @@
 using MoneyTrack.Domain.Data.Enums;
 using MoneyTrack.Domain.Operations;
 
-namespace MoneyTrack.Api.Models;
+namespace MoneyTrack.Api.Models.Operations.Requests;
 
-public class OperationModel
+public class OperationCreationRequest
 {
-    public int Id { get; set; }
     public int AccountId { get; set; }
     public int OperationCategoryId { get; set; }
     public OperationType OperationType { get; set; }
