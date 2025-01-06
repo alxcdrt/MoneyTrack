@@ -41,7 +41,7 @@ public static class AccountEndpoints
         AccountManager manager,
         CancellationToken cancellationToken)
     {
-        List<AccountDetailsResponse> accounts = await manager
+        List<AccountListResponse> accounts = await manager
             .Query()
             .Accounts()
             .ToDetailsResponse()

@@ -8,12 +8,20 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder
     .Services
     .AddStore(connectionString)
-    .AddAccountManagement();
+    .AddAccountManagement()
+    .AddCors(options => options.AddDefaultPolicy(p =>
+    {
+        p.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    }));
 
 var app = builder.Build();
 
 app.RegisterAccountEndpoints();
 app.RegisterOperationEndpoints();
 app.RegisterOperationCategoryEndpoints();
+
+app.UseCors();
 
 app.Run();

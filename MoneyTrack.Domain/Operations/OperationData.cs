@@ -17,8 +17,7 @@ public record struct OperationData(
         {
             AccountId = AccountId,
             OperationCategoryId = CategoryId,
-            OperationType = OperationType,
-            Amount = Amount,
+            Amount = OperationType == OperationType.Expense ? -Amount : Amount,
             Description = Description,
             Date = Date
         };

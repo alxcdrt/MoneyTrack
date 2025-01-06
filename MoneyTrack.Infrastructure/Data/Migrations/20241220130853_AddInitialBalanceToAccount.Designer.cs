@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoneyTrack.Infrastructure.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MoneyTrack.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(MoneyTrackContext))]
-    partial class MoneyTrackContextModelSnapshot : ModelSnapshot
+    [Migration("20241220130853_AddInitialBalanceToAccount")]
+    partial class AddInitialBalanceToAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +68,9 @@ namespace MoneyTrack.Infrastructure.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("OperationCategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OperationType")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

@@ -24,8 +24,8 @@ public static partial class ModelExtensions
             Id = operation.Id,
             AccountId = operation.AccountId,
             OperationCategoryId = operation.OperationCategoryId,
-            OperationType = operation.OperationType,
-            Amount = operation.Amount,
+            OperationType = operation.Amount < 0 ? OperationType.Expense : OperationType.Income,
+            Amount = Math.Abs(operation.Amount),
             Description = operation.Description,
             Date = operation.Date
         };
